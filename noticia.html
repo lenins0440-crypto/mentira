@@ -2,17 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>ALERTA GLOBAL</title>
+<title>ALERTA APOCALÍPTICA</title>
 
 <style>
 
-body{<!-- MUSICA DE FONDO -->
-<iframe width="0" height="0"
-src="nyWwoE36TtAMyK9L"
-title="musica"
-frameborder="0"
-allow="autoplay">
-</iframe>
+body{
     margin:0;
     background:black;
     overflow:hidden;
@@ -21,20 +15,20 @@ allow="autoplay">
     text-align:center;
 }
 
-/* FLASH ROJO DE ALERTA */
+/* FLASH ROJO */
 body::after{
     content:"";
     position:fixed;
     inset:0;
     background:red;
     opacity:0.08;
-    animation: alerta 1.2s infinite;
+    animation:alerta 1.2s infinite;
     pointer-events:none;
 }
 
 @keyframes alerta{
     0%,100%{opacity:0.05;}
-    50%{opacity:0.18;}
+    50%{opacity:0.2;}
 }
 
 /* TITULO GLITCH */
@@ -42,16 +36,15 @@ h1{
     margin-top:40px;
     font-size:48px;
     color:#ff2b2b;
-    animation: glitch 0.8s infinite;
     letter-spacing:4px;
+    animation:glitch 0.8s infinite;
 }
 
 @keyframes glitch{
     0%{transform:translate(0);}
-    20%{transform:translate(-2px,2px);}
-    40%{transform:translate(2px,-2px);}
-    60%{transform:translate(-2px,-1px);}
-    80%{transform:translate(2px,1px);}
+    25%{transform:translate(-2px,2px);}
+    50%{transform:translate(2px,-2px);}
+    75%{transform:translate(-2px,-1px);}
     100%{transform:translate(0);}
 }
 
@@ -60,9 +53,8 @@ h1{
     font-size:20px;
     max-width:800px;
     margin:auto;
-    margin-top:15px;
     color:#ffaaaa;
-    animation: parpadeo 2s infinite;
+    animation:parpadeo 2s infinite;
 }
 
 @keyframes parpadeo{
@@ -90,18 +82,14 @@ h1{
     position:absolute;
     font-size:22px;
     font-weight:bold;
-    color:white;
     text-shadow:0 0 10px red;
-    animation: caer linear infinite;
+    animation:caer linear infinite;
 }
 
-/* CAIDA DRAMATICA */
+/* CAIDA */
 @keyframes caer{
     0%{
         transform:translateY(-200px) translateX(0) rotate(0deg);
-        opacity:1;
-    }
-    70%{
         opacity:1;
     }
     100%{
@@ -120,7 +108,7 @@ h1{
 .a7{left:80%; animation-duration:7s;}
 .a8{left:90%; animation-duration:11s;}
 
-/* HUMO INTENSO */
+/* HUMO */
 .avion::after{
     content:"";
     position:absolute;
@@ -153,11 +141,19 @@ h1{
 
 <div class="advertencia">
 TRANSMISIÓN DE EMERGENCIA ACTIVADA.<br>
-SE HAN DETECTADO EVENTOS CRÍTICOS EN EL SISTEMA.<br>
-PREPÁRATE… LA NOTICIA SERÁ REVELADA PRONTO.
+SE HAN DETECTADO EVENTOS CRÍTICOS.<br>
+LA VERDAD SERÁ REVELADA PRONTO…
 </div>
 
 <div id="contador"></div>
+
+<!-- MUSICA (OCULTA) -->
+<iframe id="musica"
+width="0" height="0"
+src="https://www.youtube.com/embed/mPBRykH0tKc?enablejsapi=1"
+frameborder="0"
+allow="autoplay">
+</iframe>
 
 <div class="cielo">
 <div class="avion a1">✈ INFIEL</div>
@@ -197,6 +193,12 @@ function actualizar(){
 
 setInterval(actualizar,1000);
 actualizar();
+
+/* ACTIVAR MUSICA AL PRIMER CLICK */
+document.body.addEventListener("click", function(){
+    const iframe = document.getElementById("musica");
+    iframe.src += "&autoplay=1&loop=1&playlist=mPBRykH0tKc";
+}, { once:true });
 
 </script>
 
