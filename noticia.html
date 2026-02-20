@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Hora de la Noticia</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+}
+
+/* TITULO DRAMÁTICO */
+h1{
+    margin-top:60px;
+    font-size:50px;
+    color:red;
+    animation:parpadeo 1.2s infinite;
+}
+
+@keyframes parpadeo{
+    0%,100%{opacity:1;}
+    50%{opacity:0.3;}
+}
+
+#contador{
+    font-size:35px;
+    margin-top:20px;
+    color:#ff4444;
+}
+
+/* AVIONES */
+.avion{
+    position:absolute;
+    text-align:center;
+    animation:caer linear forwards;
+}
+
+.avion span{
+    font-size:14px;
+    color:#ff5555;
+    display:block;
+}
+
+@keyframes caer{
+    from{
+        transform:translateY(-120px) rotate(0deg);
+    }
+    to{
+        transform:translateY(110vh) rotate(180deg);
+        opacity:0;
+    }
+}
+
+/* HUMO */
+.humo{
+    position:absolute;
+    width:30px;
+    height:30px;
+    background:rgba(200,200,200,0.3);
+    border-radius:50%;
+    filter:blur(10px);
+    animation:humo 4s forwards;
+}
+
+@keyframes humo{
+    from{opacity:0.7; transform:scale(1);}
+    to{opacity:0; transform:scale(3) translateY(-100px);}
+}
+
+/* MENSAJE FINAL */
+.final{
+    display:none;
+    font-size:32px;
+    margin-top:40px;
+    color:red;
+    animation:aparece 2s forwards;
+}
+
+@keyframes aparece{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚠️ HORA DE LA NOTICIA ⚠️</h1>
+<div id="contador"></div>
+
+<div id="final" class="final">
+LA VERDAD SERÁ REVELADA...
+</div>
+
+<script>
+
+/* CONTADOR */
+function actualizar(){
+
+    const ahora = new Date();
+    const objetivo = new Date();
+
+    objetivo.setDate(objetivo.getDate()+1);
+    objetivo.setHours(7,0,0,0);
+
+    const diff = objetivo - ahora;
+
+    if(diff <= 0){
+        document.getElementById("contador").innerHTML="00:00:00";
+        document.getElementById("final").style.display="block";
+        return;
+    }
+
+    const h=Math.floor(diff/(1000*60*60));
+    const m=Math.floor((diff/(1000*60))%60);
+    const s=Math.floor((diff/1000)%60);
+
+    document.getElementById("contador").innerHTML=
+        h+"h "+m+"m "+s+"s";
+}
+
+setInterval(actualizar,1000);
+actualizar();
+
+
+/* AVIONES CON APODOS */
+
+const nombres=["JJ","INFIEL","MENTIRA","SECRETO","TRAICIÓN"];
+
+function crearAvion(){
+
+    const avion=document.createElement("div");
+    avion.className="avion";
+
+    const nombre=nombres[Math.floor(Math.random()*nombres.length)];
+
+    avion.innerHTML=`✈️<span>${nombre}</span>`;
+    avion.style.left=Math.random()*100+"vw";
+    avion.style.animationDuration=(5+Math.random()*6)+"s";
+
+    document.body.appendChild(avion);
+
+    const humo=document.createElement("div");
+    humo.className="humo";
+    humo.style.left=avion.style.left;
+    humo.style.top="0px";
+
+    document.body.appendChild(humo);
+
+    setTimeout(()=>{
+        avion.remove();
+        humo.remove();
+    },9000);
+}
+
+setInterval(crearAvion,1200);
+
+</script>
+
+</body>
+</html>
