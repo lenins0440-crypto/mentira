@@ -4,7 +4,77 @@
 <meta charset="UTF-8">
 <title>Hora de la Noticia</title>
 
-<style>
+<style>body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+  color:white;
+  font-family:Arial;
+}
+
+/* CIELO */
+.cielo{
+  position:fixed;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+/* AVIONES */
+.avion{
+  position:absolute;
+  font-size:20px;
+  font-weight:bold;
+  color:red;
+  animation:caer 7s linear infinite;
+}
+
+/* CAÍDA */
+@keyframes caer{
+  0%{
+    transform:translate(-120px,-120px) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translate(120vw,110vh) rotate(80deg);
+    opacity:0;
+  }
+}
+
+/* HUMO DEL AVIÓN */
+.avion::after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:rgba(200,200,200,0.6);
+  border-radius:50%;
+  left:-18px;
+  top:10px;
+  animation:humo 1.2s infinite;
+}
+
+/* ANIMACIÓN HUMO */
+@keyframes humo{
+  0%{
+    transform:scale(0.4);
+    opacity:0.8;
+  }
+  100%{
+    transform:translate(-50px,-25px) scale(2.5);
+    opacity:0;
+  }
+}
+
+/* DIFERENTES ALTURAS */
+.a1{top:5%; animation-delay:0s;}
+.a2{top:15%; animation-delay:1s;}
+.a3{top:25%; animation-delay:2s;}
+.a4{top:35%; animation-delay:3s;}
+.a5{top:45%; animation-delay:4s;}
+.a6{top:55%; animation-delay:5s;}
+.a7{top:65%; animation-delay:2.5s;}
+.a8{top:75%; animation-delay:1.5s;}
 body{
     margin:0;
     overflow:hidden;
@@ -162,5 +232,16 @@ setInterval(crearAvion,1200);
 
 </script>
 
-</body>
+</body><div class="cielo">
+
+  <div class="avion a1">✈ INFIEL</div>
+  <div class="avion a2">✈ MENTIROSO</div>
+  <div class="avion a3">✈ MAL AMIGO</div>
+  <div class="avion a4">✈ ASALTA CUNA</div>
+  <div class="avion a5">✈ CHINO FÓBICO</div>
+  <div class="avion a6">✈ INMADURO</div>
+  <div class="avion a7">✈ J.J</div>
+  <div class="avion a8">✈ EL CHUPETÓN FUE MI PERRO</div>
+
+</div>
 </html>
