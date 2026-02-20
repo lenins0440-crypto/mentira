@@ -2,246 +2,197 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Hora de la Noticia</title>
+<title>ALERTA GLOBAL</title>
 
-<style>body{
-  margin:0;
-  overflow:hidden;
-  background:black;
-  color:white;
-  font-family:Arial;
-}
+<style>
 
-/* CIELO */
-.cielo{
-  position:fixed;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-}
-
-/* AVIONES */
-.avion{
-  position:absolute;
-  font-size:20px;
-  font-weight:bold;
-  color:red;
-  animation:caer 7s linear infinite;
-}
-
-/* CAÍDA */
-@keyframes caer{
-  0%{
-    transform:translate(-120px,-120px) rotate(0deg);
-    opacity:1;
-  }
-  100%{
-    transform:translate(120vw,110vh) rotate(80deg);
-    opacity:0;
-  }
-}
-
-/* HUMO DEL AVIÓN */
-.avion::after{
-  content:"";
-  position:absolute;
-  width:14px;
-  height:14px;
-  background:rgba(200,200,200,0.6);
-  border-radius:50%;
-  left:-18px;
-  top:10px;
-  animation:humo 1.2s infinite;
-}
-
-/* ANIMACIÓN HUMO */
-@keyframes humo{
-  0%{
-    transform:scale(0.4);
-    opacity:0.8;
-  }
-  100%{
-    transform:translate(-50px,-25px) scale(2.5);
-    opacity:0;
-  }
-}
-
-/* DIFERENTES ALTURAS */
-.a1{top:5%; animation-delay:0s;}
-.a2{top:15%; animation-delay:1s;}
-.a3{top:25%; animation-delay:2s;}
-.a4{top:35%; animation-delay:3s;}
-.a5{top:45%; animation-delay:4s;}
-.a6{top:55%; animation-delay:5s;}
-.a7{top:65%; animation-delay:2.5s;}
-.a8{top:75%; animation-delay:1.5s;}
 body{
     margin:0;
-    overflow:hidden;
     background:black;
-    font-family:Arial;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
     color:white;
     text-align:center;
 }
 
-/* TITULO DRAMÁTICO */
+/* FLASH ROJO DE ALERTA */
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:red;
+    opacity:0.08;
+    animation: alerta 1.2s infinite;
+    pointer-events:none;
+}
+
+@keyframes alerta{
+    0%,100%{opacity:0.05;}
+    50%{opacity:0.18;}
+}
+
+/* TITULO GLITCH */
 h1{
-    margin-top:60px;
-    font-size:50px;
-    color:red;
-    animation:parpadeo 1.2s infinite;
+    margin-top:40px;
+    font-size:48px;
+    color:#ff2b2b;
+    animation: glitch 0.8s infinite;
+    letter-spacing:4px;
+}
+
+@keyframes glitch{
+    0%{transform:translate(0);}
+    20%{transform:translate(-2px,2px);}
+    40%{transform:translate(2px,-2px);}
+    60%{transform:translate(-2px,-1px);}
+    80%{transform:translate(2px,1px);}
+    100%{transform:translate(0);}
+}
+
+/* MENSAJE */
+.advertencia{
+    font-size:20px;
+    max-width:800px;
+    margin:auto;
+    margin-top:15px;
+    color:#ffaaaa;
+    animation: parpadeo 2s infinite;
 }
 
 @keyframes parpadeo{
     0%,100%{opacity:1;}
-    50%{opacity:0.3;}
+    50%{opacity:0.4;}
 }
 
+/* CONTADOR */
 #contador{
-    font-size:35px;
+    font-size:38px;
     margin-top:20px;
-    color:#ff4444;
+    color:red;
+    text-shadow:0 0 15px red;
+}
+
+/* CIELO */
+.cielo{
+    position:relative;
+    width:100%;
+    height:100vh;
 }
 
 /* AVIONES */
 .avion{
     position:absolute;
-    text-align:center;
-    animation:caer linear forwards;
+    font-size:22px;
+    font-weight:bold;
+    color:white;
+    text-shadow:0 0 10px red;
+    animation: caer linear infinite;
 }
 
-.avion span{
-    font-size:14px;
-    color:#ff5555;
-    display:block;
-}
-
+/* CAIDA DRAMATICA */
 @keyframes caer{
-    from{
-        transform:translateY(-120px) rotate(0deg);
+    0%{
+        transform:translateY(-200px) translateX(0) rotate(0deg);
+        opacity:1;
     }
-    to{
-        transform:translateY(110vh) rotate(180deg);
+    70%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(1000px) translateX(-300px) rotate(200deg);
         opacity:0;
     }
 }
 
-/* HUMO */
-.humo{
+/* POSICIONES */
+.a1{left:5%; animation-duration:6s;}
+.a2{left:15%; animation-duration:8s;}
+.a3{left:28%; animation-duration:7s;}
+.a4{left:40%; animation-duration:9s;}
+.a5{left:55%; animation-duration:6.5s;}
+.a6{left:68%; animation-duration:10s;}
+.a7{left:80%; animation-duration:7s;}
+.a8{left:90%; animation-duration:11s;}
+
+/* HUMO INTENSO */
+.avion::after{
+    content:"";
     position:absolute;
-    width:30px;
-    height:30px;
-    background:rgba(200,200,200,0.3);
+    width:14px;
+    height:14px;
+    background:gray;
     border-radius:50%;
-    filter:blur(10px);
-    animation:humo 4s forwards;
+    left:-18px;
+    top:8px;
+    animation:humo 0.7s infinite;
 }
 
 @keyframes humo{
-    from{opacity:0.7; transform:scale(1);}
-    to{opacity:0; transform:scale(3) translateY(-100px);}
+    0%{
+        opacity:0.9;
+        transform:scale(0.5) translateX(0);
+    }
+    100%{
+        opacity:0;
+        transform:scale(3) translateX(-60px);
+    }
 }
 
-/* MENSAJE FINAL */
-.final{
-    display:none;
-    font-size:32px;
-    margin-top:40px;
-    color:red;
-    animation:aparece 2s forwards;
-}
-
-@keyframes aparece{
-    from{opacity:0;}
-    to{opacity:1;}
-}
 </style>
 </head>
 
 <body>
 
-<h1>⚠️ HORA DE LA NOTICIA ⚠️</h1>
+<h1>⚠️ ALERTA APOCALÍPTICA ⚠️</h1>
+
+<div class="advertencia">
+TRANSMISIÓN DE EMERGENCIA ACTIVADA.<br>
+SE HAN DETECTADO EVENTOS CRÍTICOS EN EL SISTEMA.<br>
+PREPÁRATE… LA NOTICIA SERÁ REVELADA PRONTO.
+</div>
+
 <div id="contador"></div>
 
-<div id="final" class="final">
-LA VERDAD SERÁ REVELADA...
+<div class="cielo">
+<div class="avion a1">✈ INFIEL</div>
+<div class="avion a2">✈ MENTIROSO</div>
+<div class="avion a3">✈ MAL AMIGO</div>
+<div class="avion a4">✈ ASALTA CUNA</div>
+<div class="avion a5">✈ CHINO FÓBICO</div>
+<div class="avion a6">✈ INMADURO</div>
+<div class="avion a7">✈ J.J</div>
+<div class="avion a8">✈ EL CHUPETÓN FUE MI PERRO</div>
 </div>
 
 <script>
 
-/* CONTADOR */
+/* CONTADOR HASTA MAÑANA 7 AM */
+const destino = new Date();
+destino.setDate(destino.getDate()+1);
+destino.setHours(7,0,0,0);
+
 function actualizar(){
-
     const ahora = new Date();
-    const objetivo = new Date();
-
-    objetivo.setDate(objetivo.getDate()+1);
-    objetivo.setHours(7,0,0,0);
-
-    const diff = objetivo - ahora;
+    const diff = destino - ahora;
 
     if(diff <= 0){
-        document.getElementById("contador").innerHTML="00:00:00";
-        document.getElementById("final").style.display="block";
+        document.getElementById("contador").innerHTML =
+        "🚨 EVENTO ACTIVADO 🚨";
         return;
     }
 
-    const h=Math.floor(diff/(1000*60*60));
-    const m=Math.floor((diff/(1000*60))%60);
-    const s=Math.floor((diff/1000)%60);
+    const h = Math.floor(diff/(1000*60*60));
+    const m = Math.floor((diff%(1000*60*60))/(1000*60));
+    const s = Math.floor((diff%(1000*60))/1000);
 
-    document.getElementById("contador").innerHTML=
-        h+"h "+m+"m "+s+"s";
+    document.getElementById("contador").innerHTML =
+    h+"h "+m+"m "+s+"s";
 }
 
 setInterval(actualizar,1000);
 actualizar();
 
-
-/* AVIONES CON APODOS */
-
-const nombres=["JJ","INFIEL","MENTIRA","SECRETO","TRAICIÓN"];
-
-function crearAvion(){
-
-    const avion=document.createElement("div");
-    avion.className="avion";
-
-    const nombre=nombres[Math.floor(Math.random()*nombres.length)];
-
-    avion.innerHTML=`✈️<span>${nombre}</span>`;
-    avion.style.left=Math.random()*100+"vw";
-    avion.style.animationDuration=(5+Math.random()*6)+"s";
-
-    document.body.appendChild(avion);
-
-    const humo=document.createElement("div");
-    humo.className="humo";
-    humo.style.left=avion.style.left;
-    humo.style.top="0px";
-
-    document.body.appendChild(humo);
-
-    setTimeout(()=>{
-        avion.remove();
-        humo.remove();
-    },9000);
-}
-
-setInterval(crearAvion,1200);
-
 </script>
 
-</body><div class="cielo">
-
-  <div class="avion a1">✈ INFIEL</div>
-  <div class="avion a2">✈ MENTIROSO</div>
-  <div class="avion a3">✈ MAL AMIGO</div>
-  <div class="avion a4">✈ ASALTA CUNA</div>
-  <div class="avion a5">✈ CHINO FÓBICO</div>
-  <div class="avion a6">✈ INMADURO</div>
-  <div class="avion a7">✈ J.J</div>
-  <div class="avion a8">✈ EL CHUPETÓN FUE MI PERRO</div>
-
-</div>
+</body>
 </html>
